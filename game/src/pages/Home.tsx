@@ -1,12 +1,8 @@
-import { Box, Button, Center } from '@chakra-ui/react'
+import { Box, Button, Center, Link } from '@chakra-ui/react'
 import { Canvas } from '@react-three/fiber'
 
 export const Home = () => {
-  const handleStartGame = () => {
-    // todo: redirect to first scenario game
-  }
-
-  return (<Box w='100vw' h="100vh" py={{ base: 4, md: 10 }}>
+  return (<Box py={{ base: 4, md: 10 }}>
     {/* consider using react three for background animations on the game. */}
     <Box>
       <Center>
@@ -21,7 +17,9 @@ export const Home = () => {
       </Center>
     </Box>
     <Center>
-      <Button onClick={handleStartGame}>Start Game</Button>
+      <Link href="/invest-game">
+        <Button>Start Game</Button>
+      </Link>
     </Center>
   </Box>)
 }

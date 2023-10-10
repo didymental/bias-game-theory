@@ -2,13 +2,11 @@ import { Box, Button, ChakraProvider, Divider, Stack, HStack, Center, Card, Card
 import { QuestionType } from '../types/question'
 
 export const Question = ({ question }: { question: QuestionType }) => {
-  return (<Box p={4} borderWidth={1} borderColor="black" >
-    <HStack>
-      <Heading>{question.title}</Heading>
-      <Center h="50px">
-        <Divider orientation="vertical" />
-      </Center>
-      <Text>{question.description}</Text>
-    </HStack>
-  </Box>)
+  return (
+    <Box p={4} background="white" w="80%" borderRadius={10}>
+      <Stack>
+        <Heading size="lg">{question.title}</Heading>
+        <Text>{question.description}</Text>
+      </Stack>
+    </Box>)
 }
