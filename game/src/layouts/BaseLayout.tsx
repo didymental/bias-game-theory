@@ -36,7 +36,7 @@ const NavBar = () => (
 )
 
 export const BaseLayout = ({ children }: PropsWithChildren) => (
-  <Box background="gray.50" h="100vh" w="100vw" >
+  <Box background="gray.50" h="100vh" w="100vw" overflow="auto">
     <Stack>
       <NavBar />
       <Container maxW="8xl">

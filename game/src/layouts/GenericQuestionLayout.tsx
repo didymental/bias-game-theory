@@ -18,8 +18,8 @@ export const GenericQuestionLayout = ({
   }, [headerRef, canvasRef])
 
   return (
-    <Box py={{ base: 4, md: 10 }} h="100%">
-      <Box ref={headerRef} h="10vh">
+    <Box py={{ base: 4, md: 10 }} minH="100%">
+      <Box ref={headerRef} >
         <Center>
           {renderHeader()}
         </Center>
@@ -27,7 +27,9 @@ export const GenericQuestionLayout = ({
       {/* todo: update css for canvas to break flex, position: absolute, zIndex, etc */}
       {/* consider using react-three/fiber for background animations on the game. */}
       <Box ref={canvasRef} h="50vh">
-        {renderCanvas()}
+        <Center>
+          {renderCanvas()}
+        </Center>
       </Box>
       <Box >
         <Center>
@@ -35,6 +37,6 @@ export const GenericQuestionLayout = ({
         </Center>
       </Box>
 
-    </Box>
+    </Box >
   )
 }

@@ -5,7 +5,7 @@ export const Question = ({ question }: { question: QuestionType }) => {
   return (
     <Box p={4} background="white" w="80%" borderRadius={10}>
       <Stack>
-        <Heading size="lg">{question.title}</Heading>
+        <Heading size="md">{question.title}</Heading>
         <Text>{question.description}</Text>
       </Stack>
     </Box>)
