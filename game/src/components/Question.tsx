@@ -1,4 +1,4 @@
-import { Box, Button, ChakraProvider, Divider, Stack, HStack, Center, Card, CardHeader, Text, Heading } from '@chakra-ui/react'
+import { Box, Stack, Text, Heading } from '@chakra-ui/react'
 import { QuestionType } from '../types/question'
 
 export const Question = ({ question }: { question: QuestionType }) => {

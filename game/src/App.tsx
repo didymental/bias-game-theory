@@ -1,4 +1,4 @@
-import { Box, ChakraProvider, Stack } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { Home } from "./pages/Home"
 import { InvestGame } from './pages/InvestGame'
 import { BaseLayout } from './layouts/BaseLayout'

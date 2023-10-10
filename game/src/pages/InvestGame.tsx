@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody, ModalFooter, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
+import { Button, Modal, ModalBody, ModalFooter, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
 import { useState } from "react"
 import { Question } from "../components/Question"
 import { InvestGameAnswerResponse, InvestGameContent } from "../content/InvestGameContent"
