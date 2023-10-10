@@ -8,7 +8,8 @@ import {
 } from '@chakra-ui/react'
 import { PropsWithChildren } from 'react'
 
-export const NavBar = () => (
+// TODO: update logo
+const NavBar = () => (
   <Box>
     <Flex
       bg={'white'}
