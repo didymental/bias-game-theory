@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Heading, Link, Stack, Text, useBoolean, Flex } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading, Link, Stack, Text, useBoolean } from "@chakra-ui/react";
 import { GenericQuestionLayout } from "../layouts/GenericQuestionLayout"
 import { ReactNode, useState } from "react";
 import { AnswerOption, InvestGameQuestions } from "../content/InvestGameContent";

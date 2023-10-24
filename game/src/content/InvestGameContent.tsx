@@ -1,4 +1,4 @@
-import { Stack, Text, chakra, Box, Heading } from "@chakra-ui/react";
+import { Stack, Text, chakra, Heading } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import Tree from "react-d3-tree"
 import { DecisionTree } from "../components/DecisionTree";
