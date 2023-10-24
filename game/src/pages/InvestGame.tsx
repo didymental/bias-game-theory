@@ -1,85 +1,78 @@
-import { Button, Modal, ModalBody, ModalFooter, ModalContent, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react"
-import { useState } from "react"
-import { Question } from "../components/Question"
-import { InvestGameAnswerResponse, InvestGameContent } from "../content/InvestGameContent"
+import { Box, Button, HStack, Heading, Link, Stack, Text, useBoolean } from "@chakra-ui/react";
 import { GenericQuestionLayout } from "../layouts/GenericQuestionLayout"
-import { InvestOptions } from "../types/investOptions"
-
-const useGameInvestOrNoInvest = () => {
-  const [selection, setSelection] = useState<InvestOptions | null>(null)
-  const [final, setFinal] = useState<InvestOptions | null>(null)
-  const { onOpen: openModal, onClose: closeModal, isOpen: shouldShowModal } = useDisclosure()
-
-  const handleSelection = (selection: InvestOptions) => {
-    switch (selection) {
-      case InvestOptions.INVEST:
-      case InvestOptions.NO_INVEST:
-        setSelection(selection)
-        break
-
-      default:
-        // if selection is neither available options, do nothing
-        break
-    }
-  }
-
-  const confirmSelection = () => {
-    if (!selection) return
-    setFinal(selection)
-    openModal()
-  }
-
-  return {
-    selection,
-    handleSelection,
-    hasSelectedOption: selection != null,
-    confirmSelection,
-    shouldShowModal,
-    closeModal,
-    openModal,
-    final,
-  }
-}
+import { useState } from "react";
+import { AnswerOption, InvestGameQuestions } from "../content/InvestGameContent";
 
 export const InvestGame = () => {
-  const { selection,
-    handleSelection,
-    hasSelectedOption,
-    confirmSelection,
-    shouldShowModal,
-    closeModal,
-    final: finalOption
-  } = useGameInvestOrNoInvest()
+    const [questionIndex, setQuestionIndex] = useState(0);
+    const [prevAnswerIndex, setPrevAnswerIndex] = useState<number | null>(null);
+    const [answerIndex, setAnswerIndex] = useState<number | null>(null);
+    const [isAnswerConfirmed, setAnswerConfirmed] = useBoolean(false);
+    const currentQuestion = InvestGameQuestions[questionIndex];
+    const currentOptions = currentQuestion.options(prevAnswerIndex);
 
-
-  return (
+    return (
     <>
       <GenericQuestionLayout
-        renderHeader={() => <Question question={InvestGameContent} />}
-        renderOptions={() => (<Stack>
-          <Button onClick={() => handleSelection(InvestOptions.INVEST)} background={hasSelectedOption && selection === InvestOptions.INVEST ? 'blue.100' : 'gray.100'}>Invest</Button>
-          <Button onClick={() => handleSelection(InvestOptions.NO_INVEST)} background={hasSelectedOption && selection === InvestOptions.NO_INVEST ? 'blue.100' : 'gray.100'}>Don't Invest</Button>
-          {hasSelectedOption ? <Button onClick={confirmSelection}>Confirm</Button> : null}
-        </Stack>)
-
+        renderHeader={() => <Question title={currentQuestion.title} description={currentQuestion.description}  />}
+        renderOptions={() => 
+          (!isAnswerConfirmed ? 
+          <Stack>
+            <AnswerButtons options={currentOptions} selection={answerIndex} handleSelection={setAnswerIndex} />
+            {answerIndex != null ? <Button onClick={setAnswerConfirmed.on}>Confirm</Button> : null}
+          </Stack> :
+          questionIndex == InvestGameQuestions.length - 1 ?
+          <Link href="/">
+            <Button>
+                Done
+            </Button>
+          </Link> :
+          <Button onClick={() => {
+            setQuestionIndex((i) => i + 1); 
+            setPrevAnswerIndex(() => {
+                const currAns = answerIndex;
+                setAnswerIndex(null);
+                return currAns;
+            })
+            setAnswerConfirmed.off();
+            }}>
+            Next
+          </Button> 
+          )
         }
+        renderResponse={() => (isAnswerConfirmed && answerIndex != null ? currentOptions[answerIndex].feedbackBody : null)}
         // TODO: add canvas animation here
         renderCanvas={() => null}
       />
-      <Modal isOpen={shouldShowModal} onClose={closeModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{finalOption ? InvestGameAnswerResponse[finalOption].header : null}</ModalHeader>
-          {/* <ModalCloseButton /> */}
-
-          <ModalBody>
-            {finalOption ? InvestGameAnswerResponse[finalOption].body : null}
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={closeModal}>Got it!</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   )
+}
+
+const Question = ({ title, description }: { title: string; description: string }) => {
+  return (
+    <Box p={4} background="white" w="80%" borderRadius={10}>
+      <Stack>
+        <Heading size="md">{title}</Heading>
+        <Text>{description}</Text>
+      </Stack>
+    </Box>)
+}
+
+interface AnswerButtonsProps {
+    options: AnswerOption[];
+    selection: number | null;
+    handleSelection: (index: number) => void
+}
+
+const AnswerButtons = ({options, selection, handleSelection}: AnswerButtonsProps) => {
+  return (
+    <HStack>
+    {options.map((option, index) => 
+        <Button 
+        onClick={() => handleSelection(index)} 
+        background={selection === index ? 'blue.100' : 'gray.100'}
+        >
+            {option.label}
+        </Button>)}
+    </HStack>)
 }

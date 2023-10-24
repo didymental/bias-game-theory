@@ -1,15 +1,19 @@
 import { Center, Box } from "@chakra-ui/react"
 import { ReactNode, useEffect, useRef } from "react"
 
+interface GenericQuestionLayoutProps {
+  renderHeader: () => ReactNode;
+  renderCanvas: () => ReactNode;
+  renderResponse: () => ReactNode;
+  renderOptions: () => ReactNode;
+}
+
 export const GenericQuestionLayout = ({
   renderHeader,
   renderCanvas,
+  renderResponse,
   renderOptions,
-}: {
-  renderHeader: () => ReactNode,
-  renderCanvas: () => ReactNode,
-  renderOptions: () => ReactNode
-}) => {
+}: GenericQuestionLayoutProps) => {
   const headerRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLDivElement | null>(null)
 
@@ -26,9 +30,14 @@ export const GenericQuestionLayout = ({
       </Box>
       {/* todo: update css for canvas to break flex, position: absolute, zIndex, etc */}
       {/* consider using react-three/fiber for background animations on the game. */}
-      <Box ref={canvasRef} h="50vh">
+      <Box ref={canvasRef} h="40vh">
         <Center>
           {renderCanvas()}
+        </Center>
+      </Box>
+      <Box >
+        <Center>
+          {renderResponse()}
         </Center>
       </Box>
       <Box >
