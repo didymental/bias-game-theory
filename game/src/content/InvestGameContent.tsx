@@ -149,26 +149,34 @@ const BuyOrHoldOptions = (roseBy = '7%') => [
   }
 ];
 
-const HoldOrSellOptions = [
+const HoldOrSellOptions = (roseBy = "7%") => ([
   {
     label: "Hold",
     feedbackHeader: ``,
     feedbackBody: (
-      <Text>
-        Some feedback here
-      </Text>
+      <Stack borderRadius={10} bg="pink.100" p={4} w="80%">
+        <Heading size="md">Observation</Heading>
+        <Text>
+          Good call! The stock did rise indeed by {roseBy}.
+        </Text>
+      </Stack>
     )
   },
   {
     label: "Sell",
     feedbackHeader: `You sold your shares!`,
     feedbackBody: (
-      <Text>
-        Some feedback here
-      </Text>
+      <Stack borderRadius={10} bg="pink.100" p={4} w="80%">
+        <Heading size="md">Observation</Heading>
+        <Text>
+          Congrats on actualising your profit! <br />
+          <br />
+          The stock rose by {roseBy}. It looks like the analysts were right.
+        </Text>
+      </Stack>
     )
   }
-]
+])
 
 const QuestionTwo: Question = {
   title: `Should Alex purchase this stock?`,
@@ -202,7 +210,7 @@ const QuestionThree: Question = {
     </>
   ),
   options: (prevAnswer) =>
-    prevAnswer === 0 ? HoldOrSellOptions : BuyOrHoldOptions('10%'),
+    prevAnswer === 0 ? HoldOrSellOptions("10%") : BuyOrHoldOptions('10%'),
 }
 
 const QuestionFour: Question = {
@@ -225,12 +233,20 @@ const QuestionFour: Question = {
     </>
   ),
   options: (prevAnswer) =>
-    prevAnswer === 0 ? HoldOrSellOptions : BuyOrHoldOptions('15%'),
+    prevAnswer === 0 ? HoldOrSellOptions("15%") : BuyOrHoldOptions('15%'),
 }
 
 const QuestionFive: Question = {
-  title: `Help Alex make a decision: Invest or Don't Invest?`,
-  description: `Stock crashed!`,
+  title: `What should Alex continue to do?`,
+  description: (
+    <>
+      {`Again, Alex notices that the stock is still increasing.`}
+      <br />
+      <br />
+      {`Analysts continue to recommend a Buy on the stock, and there seems to be strong confidence that the stock will perform.`}
+      <br />
+    </>
+  ),
   options: (prevAnswer) => prevAnswer === 0 ? [
     {
       label: "Hold",
@@ -253,7 +269,7 @@ const QuestionFive: Question = {
         <Stack borderRadius={10} bg="purple.100" p={4} w="80%">
           <Heading size="md">Observation</Heading>
           <Text>
-            Phew - good call! The stock crashed. It tumbled by 70% in a day, and you helped Alex avoid losing all his money.
+            Phew - good call! Alex managed to sell his stock before it crashed. The stock price tumbled by 70% in a day, and you helped Alex avoid losing all his money.
           </Text>
           <br />
           <ReflectionPrisonerDilemma />
