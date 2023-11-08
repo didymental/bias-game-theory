@@ -2,11 +2,12 @@ import {
   Box,
   Flex,
   Link,
-  Text,
   Container,
   Stack,
+  Text,
 } from '@chakra-ui/react'
 import { PropsWithChildren } from 'react'
+import Logo from '../../public/logo.svg';
 
 // TODO: update logo
 const NavBar = () => (
@@ -21,14 +22,12 @@ const NavBar = () => (
       borderStyle={'solid'}
       borderColor={'gray.200'}
       align={'center'}>
-      <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+      <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }} align="center">
         <Link href="/">
-          <Text
-            textAlign={'left'}
-            fontFamily={'heading'}
-            color={'gray.800'}>
-            Logo
-        </Text>
+          <img  src={Logo} style={{height: "30px"}} alt="logo"/>
+        </Link>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <Text marginLeft="5" fontWeight="bold">Dollar Dilemma</Text>
         </Link>
       </Flex>
     </Flex>

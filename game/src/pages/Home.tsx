@@ -1,10 +1,11 @@
 import { Box, Button, Center, Link } from '@chakra-ui/react'
-import { Canvas } from '@react-three/fiber'
+// import { Canvas } from '@react-three/fiber'
+import Logo from '../../public/logo.png';
 
 export const Home = () => {
   return (<Box py={{ base: 4, md: 10 }}>
     {/* consider using react three for background animations on the game. */}
-    <Box>
+    {/* <Box>
       <Center>
         <Canvas>
           <ambientLight intensity={0.1} />
@@ -15,10 +16,13 @@ export const Home = () => {
           </mesh>
         </Canvas>
       </Center>
-    </Box>
+    </Box> */}
+    <Center>
+      <img  src={Logo} style={{height: "40vh", margin: "2vh"}} alt="logo"/>
+    </Center>
     <Center>
       <Link href="/invest-game">
-        <Button>Start Game</Button>
+        <Button size="lg">Start Game</Button>
       </Link>
     </Center>
   </Box>)

@@ -15,6 +15,7 @@ export const InvestGame = () => {
     <>
       <GenericQuestionLayout
         renderHeader={() => <Question title={currentQuestion.title} description={currentQuestion.description} />}
+        renderImage={() => <img  src={currentQuestion.image} style={{height: "40vh", margin: "2vh"}} />}
         renderOptions={() =>
         (!isAnswerConfirmed ?
           <Stack>

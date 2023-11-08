@@ -4,13 +4,14 @@ import { ReactNode, useEffect, useRef } from "react"
 interface GenericQuestionLayoutProps {
   renderHeader: () => ReactNode;
   renderCanvas: () => ReactNode;
+  renderImage: () => ReactNode;
   renderResponse: () => ReactNode;
   renderOptions: () => ReactNode;
 }
 
 export const GenericQuestionLayout = ({
   renderHeader,
-  renderCanvas,
+  renderImage,
   renderResponse,
   renderOptions,
 }: GenericQuestionLayoutProps) => {
@@ -30,9 +31,14 @@ export const GenericQuestionLayout = ({
       </Box>
       {/* todo: update css for canvas to break flex, position: absolute, zIndex, etc */}
       {/* consider using react-three/fiber for background animations on the game. */}
-      <Box ref={canvasRef} h="40vh">
+      {/* <Box ref={canvasRef} h="40vh">
         <Center>
           {renderCanvas()}
+        </Center>
+      </Box> */}
+      <Box >
+        <Center>
+          {renderImage()}
         </Center>
       </Box>
       <Box >
@@ -40,7 +46,7 @@ export const GenericQuestionLayout = ({
           {renderResponse()}
         </Center>
       </Box>
-      <Box >
+      <Box marginTop="20px">
         <Center>
           {renderOptions()}
         </Center>

@@ -2,6 +2,11 @@ import { Stack, Text, chakra, Heading } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import Tree from "react-d3-tree"
 import { DecisionTree } from "../components/DecisionTree";
+import ImageOne from '../assets/equilibrium.png';
+import ImageTwo from '../assets/growth1.png';
+import ImageThree from '../assets/growth2.png';
+import ImageFour from '../assets/growth3.png';
+import ImageFive from '../assets/innovation.png';
 
 // @ts-ignore
 const ChakraTree = chakra(Tree)
@@ -39,6 +44,7 @@ interface Question {
   title: string;
   description: string | ReactNode;
   options: (prevAnswer: number | null) => AnswerOption[];
+  image: string;
 }
 
 const QuestionOne: Question = {
@@ -119,7 +125,8 @@ const QuestionOne: Question = {
         </Stack>
       )
     }
-  ]
+  ],
+  image: ImageOne,
 }
 
 const BuyOrHoldOptions = (roseBy = '7%') => [
@@ -191,6 +198,7 @@ const QuestionTwo: Question = {
     </>
   ),
   options: () => BuyOrHoldOptions('7%'),
+  image: ImageTwo,
 }
 
 const QuestionThree: Question = {
@@ -211,6 +219,7 @@ const QuestionThree: Question = {
   ),
   options: (prevAnswer) =>
     prevAnswer === 0 ? HoldOrSellOptions("10%") : BuyOrHoldOptions('10%'),
+  image: ImageThree,
 }
 
 const QuestionFour: Question = {
@@ -234,6 +243,7 @@ const QuestionFour: Question = {
   ),
   options: (prevAnswer) =>
     prevAnswer === 0 ? HoldOrSellOptions("15%") : BuyOrHoldOptions('15%'),
+  image: ImageFour,
 }
 
 const QuestionFive: Question = {
@@ -305,7 +315,8 @@ const QuestionFive: Question = {
           </Stack>
         )
       }
-    ]
+    ],
+    image: ImageFive,
 }
 
 
